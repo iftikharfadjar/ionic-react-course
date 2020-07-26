@@ -1,7 +1,8 @@
 import React from 'react'
-import { IonButton, IonToast, IonLabel } from  '@ionic/react'
+import { IonPage,IonHeader,IonToolbar, IonButtons,IonMenuButton, IonTitle, IonContent,IonMenuToggle, IonButton, IonToast, IonLabel, IonApp } from  '@ionic/react'
 import axios from 'axios'
 import Users from './Users.js'
+import AppMenu from './AppMenu'
 
 
 
@@ -33,18 +34,41 @@ class App extends React.Component {
  
       render(){
         return (
-            <div>
-               
+            <IonApp>
+                <AppMenu></AppMenu>
+               <IonPage id="main-content">
+                <IonHeader>
+                    <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonMenuButton></IonMenuButton>
+                    </IonButtons>
+                    <IonTitle>Inbox</IonTitle>
+                    </IonToolbar>
+                </IonHeader>
+                <IonContent>
                 <h1>Hello World</h1>
                 <IonButton onClick={this.handleclick}>Click Me</IonButton>
                 <IonToast isOpen={this.state.showToast} message="Hi World" />
-                {this.state.users.map(user => (
+                <IonMenuToggle>
+                    <IonButton >Open Menu</IonButton>
+                </IonMenuToggle>
+
+                {this.state.showToast &&  <Users users={this.state.users}></Users>}
+
+                {/* {this.state.showToast && this.state.users.map(user => (
                     <div key={user.name}>
                         <IonLabel>{user.name}</IonLabel>
                     </div>
-                )) }
+                )) } */}
+               
+              
+                </IonContent>
+            </IonPage>
+
+
+                
          
-            </div>
+            </IonApp>
         )
     }
 }

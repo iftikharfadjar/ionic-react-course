@@ -1,7 +1,7 @@
 import React from 'react';
 // import 'bootstrap/dist/css/bootstrap.css';
-import '@ionic/core/css/core.css';
-import '@ionic/core/css/ionic.bundle.css';
+// import '@ionic/core/css/core.css';
+// import '@ionic/core/css/ionic.bundle.css';
 
 
 
@@ -10,6 +10,11 @@ import {
   IonRow,
   IonGrid,
   IonCol,
+  IonCard,
+  IonItem,
+  IonAvatar,
+  IonLabel,
+  IonButton
 } from '@ionic/react';
 
 
@@ -25,7 +30,20 @@ const Users = ({users}) => {
             <IonRow>
                 {users.map(user => (
                   <IonCol  size-lg="3" size-md="4" size-sm="6" size-xs="12" key={user.id}>
-                      <h1>{user.login}</h1>
+                      <IonCard >
+                        <IonItem>
+                            <IonAvatar slot='start'>
+                            <img src={process.env.PUBLIC_URL + "avatar.png"} />
+                            </IonAvatar >
+                            <IonLabel>
+                              <h1>{user.name}</h1>
+                              <IonButton color="dark">more..</IonButton>
+                            </IonLabel>
+                          </IonItem>
+                      </IonCard>
+
+
+
                   </IonCol>
                 ))}
 
