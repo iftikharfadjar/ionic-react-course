@@ -1,9 +1,0 @@
---- 
- 
-deployment:
- 
- tasks:
- 
- - export DEPLOYPATH=/home/courseki/frontEnd
- 
- - /usr/bin/rsync -Paz * $DEPLOYPATH --delete

@@ -4,6 +4,6 @@ deployment:
  
  tasks:
  
- - export DEPLOYPATH=/home/courseki/rnd.react.coursekita.com
+ - export DEPLOYPATH=/home/courseki/frontEnd
  
  - /usr/bin/rsync -Paz * $DEPLOYPATH --delete
