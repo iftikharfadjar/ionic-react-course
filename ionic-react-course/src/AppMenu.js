@@ -1,6 +1,6 @@
 import React , {useState} from 'react'
-import { IonIcon, IonLabel, IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonRouterOutlet} from  '@ionic/react'
-import { mail, paperPlane, heart, trash, archive, warning } from 'ionicons/icons';
+import {IonButton,IonButtons, IonIcon, IonLabel, IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonRouterOutlet} from  '@ionic/react'
+import {search, personCircle, mail, paperPlane, heart, trash, archive, warning } from 'ionicons/icons';
 
 
 function AppMenu() {
@@ -8,7 +8,19 @@ function AppMenu() {
         <>
         <IonMenu side="start" open={true} content-id="main-content"> 
             <IonHeader>
-            <IonToolbar translucent>
+            <IonToolbar translucent> <IonButtons slot="secondary">
+                <IonButton>
+                  <IonIcon slot="icon-only" icon={personCircle} />
+                </IonButton>
+                <IonButton>
+                  <IonIcon slot="icon-only" icon={search} />
+                </IonButton>
+              </IonButtons>
+              <IonButtons slot="primary">
+                <IonButton color="secondary">
+                  <IonIcon slot="icon-only" />
+                </IonButton>
+              </IonButtons>
               <IonTitle>Menu</IonTitle>
             </IonToolbar>
           </IonHeader>

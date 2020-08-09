@@ -1,9 +1,10 @@
 import React from 'react'
-import { IonPage,IonHeader,IonToolbar, IonButtons,IonMenuButton, IonTitle, IonContent,IonMenuToggle, IonButton, IonToast, IonLabel, IonApp } from  '@ionic/react'
+import {IonIcon, IonPage,IonHeader,IonToolbar, IonButtons,IonMenuButton, IonTitle, IonContent,IonMenuToggle, IonButton, IonToast, IonApp } from  '@ionic/react'
 import axios from 'axios'
 import Users from './Users.js'
 import AppMenu from './AppMenu'
-
+import Petoydanbentang from './Petoydanbentang'
+import { helpCircle ,search, personCircle, mail, paperPlane, heart, trash, archive, warning } from 'ionicons/icons';
 
 
 class App extends React.Component {
@@ -39,14 +40,31 @@ class App extends React.Component {
                <IonPage id="main-content">
                 <IonHeader>
                     <IonToolbar>
-                    <IonButtons slot="start">
-                        <IonMenuButton></IonMenuButton>
-                    </IonButtons>
-                    <IonTitle>Inbox</IonTitle>
+                        {/* <IonButtons slot="start">
+                            <IonMenuButton></IonMenuButton>
+                        </IonButtons> */}
+                        <IonButtons slot="end">
+                        <IonButton>
+                            Home
+                        </IonButton>
+                        <IonButton>
+                            About
+                        </IonButton>
+                        </IonButtons>
+                       
+                        <IonTitle>Inbox</IonTitle>
+                        <IonButtons slot="primary">
+                        <IonButton fill="solid" color="secondary">
+                            Help
+                            <IonIcon slot="end" icon={helpCircle} />
+                        </IonButton>
+                        </IonButtons>
+                        
                     </IonToolbar>
                 </IonHeader>
                 <IonContent>
                 <h1>Hello World</h1>
+                <Petoydanbentang></Petoydanbentang>
                 <IonButton onClick={this.handleclick}>Click Me</IonButton>
                 <IonToast isOpen={this.state.showToast} message="Hi World" />
                 <IonMenuToggle>
