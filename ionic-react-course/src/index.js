@@ -1,21 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-// import App from './App';
+import App from "./App";
+// import AppClass from "./AppClass";
 import * as serviceWorker from "./serviceWorker";
 // import Petoydanbentang from './Petoydanbentang'
-import BelajarState from "./BelajarState";
+// import BelajarState from "./BelajarState";
 import "@ionic/react/css/core.css";
 
 // const contohArray = ["bentang", "petoy", "bayu"]
 
-const bebe = {
-  nama: "hila",
-  address: "margahayu",
-  photo: process.env.PUBLIC_URL + "avatar.png",
-  contohNum: 3,
-  contohArray: ["bentangArray", "petoyArray", "bayuArray"],
-};
+// const bebe = {
+//   nama: "hila",
+//   address: "margahayu",
+//   photo: process.env.PUBLIC_URL + "avatar.png",
+//   contohNum: 3,
+//   contohArray: ["bentangArray", "petoyArray", "bayuArray"],
+// };
 // json -> campuran object array
 
 // variable
@@ -26,7 +27,7 @@ const bebe = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <BelajarState />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
