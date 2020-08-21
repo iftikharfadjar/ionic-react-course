@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import TimePrayerTable from "./TimePrayerTable";
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonApp,
+  IonPage,
+} from "@ionic/react";
 
 function App() {
   const [timePrayer, setTimePrayer] = useState();
@@ -11,7 +20,7 @@ function App() {
         "https://api.aladhan.com/timingsByAddress/20-08-2020?address=jakarta&method=5"
       );
       if (res != null) {
-        setTimePrayer({ time: res.data.data });
+        setTimePrayer(res.data.data);
         setShow(true);
       }
     }
@@ -22,7 +31,26 @@ function App() {
     //   cleanup;
     // };
   }, []);
-  return <div>{show && timePrayer.time.timings.Fajr}</div>;
+  return (
+    <IonApp>
+      <IonPage>
+        <IonHeader>
+          <IonToolbar>
+            <IonTitle>Jadwal Shalat Syifaina</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent>
+          {show && (
+            <TimePrayerTable
+              Timings={timePrayer.timings}
+              Date={timePrayer.date}
+              Location={timePrayer.meta}
+            ></TimePrayerTable>
+          )}
+        </IonContent>
+      </IonPage>
+    </IonApp>
+  );
 }
 
 export default App;
