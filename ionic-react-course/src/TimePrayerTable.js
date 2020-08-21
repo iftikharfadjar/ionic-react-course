@@ -1,12 +1,17 @@
 import React from "react";
-import { IonItem, IonLabel, IonList } from "@ionic/react";
+import { IonItem, IonLabel, IonList, IonText } from "@ionic/react";
 
-function TimePrayerTable({ Timings, Date, Location }) {
+function TimePrayerTable({ Timings, Date, City, Location }) {
   return (
     <>
-      <h1>
-        {Date.readable}, {Location.timezone}
-      </h1>
+      <IonItem>
+        <IonText>
+          <h1>
+            {Date.readable}, {City}
+          </h1>
+        </IonText>
+      </IonItem>
+
       <IonList>
         <IonItem>
           <IonLabel>Shubuh : {Timings.Fajr}</IonLabel>

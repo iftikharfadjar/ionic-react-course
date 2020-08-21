@@ -8,29 +8,43 @@ import {
   IonContent,
   IonApp,
   IonPage,
+  IonList,
+  IonItem,
+  IonInput,
+  IonButton,
 } from "@ionic/react";
+import dayjs from "dayjs";
+
+const formatDate = (isoString) => {
+  return dayjs(isoString).format("DD-MM-YYYY");
+};
 
 function App() {
   const [timePrayer, setTimePrayer] = useState();
-  const [show, setShow] = useState(false);
+  const [update, setUpdate] = useState(false);
+  const [today, setToday] = useState();
+  const [location, setLocation] = useState("jakarta");
 
   useEffect(() => {
     async function fetchData() {
+      const now = dayjs(new Date());
+      setToday(now.toISOString());
       const res = await axios.get(
-        "https://api.aladhan.com/timingsByAddress/20-08-2020?address=jakarta&method=5"
+        `https://api.aladhan.com/timingsByAddress/${formatDate(
+          today
+        )}?address=${location}&method=5`
       );
       if (res != null) {
         setTimePrayer(res.data.data);
-        setShow(true);
+        setUpdate(true);
       }
     }
-
     fetchData();
 
     // return () => {
     //   cleanup;
     // };
-  }, []);
+  }, [update]);
   return (
     <IonApp>
       <IonPage>
@@ -40,10 +54,30 @@ function App() {
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          {show && (
+          <IonList>
+            <IonItem>
+              <IonInput
+                value={location}
+                onIonChange={(e) => setLocation(e.detail.value)}
+                placeholder="Nama Kota"
+              ></IonInput>
+            </IonItem>
+            <IonItem>
+              <IonButton
+                onClick={() => {
+                  setUpdate(false);
+                }}
+              >
+                Jadwal Shalat
+              </IonButton>
+            </IonItem>
+          </IonList>
+
+          {update && (
             <TimePrayerTable
               Timings={timePrayer.timings}
               Date={timePrayer.date}
+              City={location}
               Location={timePrayer.meta}
             ></TimePrayerTable>
           )}
