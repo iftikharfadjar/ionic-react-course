@@ -1,11 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
-// import AppClass from "./AppClass";
+// import App from "./App";
+// import AppSample from "./AppSample";
 import * as serviceWorker from "./serviceWorker";
 // import Petoydanbentang from './Petoydanbentang'
 // import BelajarState from "./BelajarState";
+import SampleUseEffect from "./SampleUseEffect";
+
 import "@ionic/react/css/core.css";
 
 // const contohArray = ["bentang", "petoy", "bayu"]
@@ -25,7 +27,7 @@ import "@ionic/react/css/core.css";
 // Object
 // array
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<SampleUseEffect />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
