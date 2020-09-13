@@ -8,10 +8,12 @@ import {
   IonContent,
   IonApp,
   IonPage,
-  IonList,
   IonItem,
   IonInput,
   IonButton,
+  IonDatetime,
+  IonCard,
+  IonCardContent,
 } from "@ionic/react";
 import dayjs from "dayjs";
 
@@ -21,9 +23,12 @@ const formatDate = (isoString) => {
 
 function App() {
   const [timePrayer, setTimePrayer] = useState();
-  const [update, setUpdate] = useState(false);
+  const [update, setUpdate] = useState();
   const [today, setToday] = useState();
-  const [location, setLocation] = useState("jakarta");
+  const [location, setLocation] = useState({
+    setting: "jakarta",
+    updateLoc: "jakarta",
+  });
 
   useEffect(() => {
     async function fetchData() {
@@ -32,10 +37,11 @@ function App() {
       const res = await axios.get(
         `https://api.aladhan.com/timingsByAddress/${formatDate(
           today
-        )}?address=${location}&method=5`
+        )}?address=${location.updateLoc}&method=5`
       );
       if (res != null) {
         setTimePrayer(res.data.data);
+        setLocation({ ...location, setting: location.updateLoc });
         setUpdate(true);
       }
     }
@@ -47,42 +53,51 @@ function App() {
   }, [update]);
   return (
     <IonApp>
-      <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Jadwal Shalat Syifaina</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent>
-          <IonList>
-            <IonItem>
-              <IonInput
-                value={location}
-                onIonChange={(e) => setLocation(e.detail.value)}
-                placeholder="Nama Kota"
-              ></IonInput>
-            </IonItem>
-            <IonItem>
-              <IonButton
-                onClick={() => {
-                  setUpdate(false);
-                }}
-              >
-                Jadwal Shalat
-              </IonButton>
-            </IonItem>
-          </IonList>
-
-          {update && (
-            <TimePrayerTable
-              Timings={timePrayer.timings}
-              Date={timePrayer.date}
-              City={location}
-              Location={timePrayer.meta}
-            ></TimePrayerTable>
-          )}
-        </IonContent>
-      </IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle className="ion-text-center">
+            Jadwal Shalat Syifaina
+          </IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent className="ion-padding">
+        <IonItem>
+          <IonInput
+            value={location.updateLoc}
+            onIonChange={(e) =>
+              setLocation({ ...location, updateLoc: e.detail.value })
+            }
+            placeholder="Nama Kota"
+          ></IonInput>
+        </IonItem>
+        <IonItem>
+          <IonDatetime
+            value={today}
+            onIonChange={(event) => setToday(event.detail.value)}
+          ></IonDatetime>
+        </IonItem>
+        <IonItem>
+          <IonButton
+            onClick={() => {
+              setUpdate(false);
+            }}
+          >
+            Jadwal Shalat
+          </IonButton>
+        </IonItem>
+        <IonCard>
+          <IonCardContent className="ion-text-center">
+            {update && (
+              <TimePrayerTable
+                Timings={timePrayer.timings}
+                Date={timePrayer.date}
+                City={location.setting}
+                Location={timePrayer.meta}
+              ></TimePrayerTable>
+            )}
+          </IonCardContent>
+        </IonCard>
+      </IonContent>
     </IonApp>
   );
 }

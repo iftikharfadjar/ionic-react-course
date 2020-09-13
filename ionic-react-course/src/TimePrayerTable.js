@@ -1,18 +1,23 @@
 import React from "react";
-import { IonItem, IonLabel, IonList, IonText } from "@ionic/react";
+import {
+  IonItem,
+  IonLabel,
+  IonList,
+  IonItemGroup,
+  IonText,
+  IonItemSliding,
+  IonItemDivider,
+} from "@ionic/react";
 
 function TimePrayerTable({ Timings, Date, City, Location }) {
   return (
     <>
-      <IonItem>
-        <IonText>
-          <h1>
+      <IonItemSliding>
+        <IonItemDivider>
+          <IonLabel>
             {Date.readable}, {City}
-          </h1>
-        </IonText>
-      </IonItem>
-
-      <IonList>
+          </IonLabel>
+        </IonItemDivider>
         <IonItem>
           <IonLabel>Shubuh : {Timings.Fajr}</IonLabel>
         </IonItem>
@@ -28,7 +33,7 @@ function TimePrayerTable({ Timings, Date, City, Location }) {
         <IonItem>
           <IonLabel>Isya : {Timings.Isha}</IonLabel>
         </IonItem>
-      </IonList>
+      </IonItemSliding>
     </>
   );
 }
